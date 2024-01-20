@@ -1,4 +1,4 @@
-# Hubii - Test
+# Hubii - Challenge
 
 
 Estamos procurando um desenvolvedor back-end sênior para se juntar à nossa equipe e ajudar a criar e gerenciar nossos micro-serviços em PHP (Laravel). Este teste técnico tem como objetivo avaliar suas habilidades técnicas nessas áreas.
@@ -39,3 +39,18 @@ Implemente logs que rastreiem todas as ações realizadas pelo micro-serviço de
 
 
 # Solução
+
+1 - Gerando certificado ssl para trabalhar local usando mkcerts
+
+Instalação no seu ambiente no seguinte link:
+[text](https://github.com/FiloSottile/mkcert?ref=knp-backend.ghost.io)
+
+
+cd /nginx/certs
+mkcert -key-file hubii.local.key.pem -cert-file hubii.local.pem localhost hubbi.local "*.hubii.local" 127.0.0.1 ::1
+
+Atualizar hosts
+
+```
+sudo sh -c 'echo "127.0.0.1 hubbi.local" >> /etc/hosts'
+```

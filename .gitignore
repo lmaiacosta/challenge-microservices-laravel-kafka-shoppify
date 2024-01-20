@@ -1,0 +1,4 @@
+.nsfg
+/mysql/data
+/logs
+.env

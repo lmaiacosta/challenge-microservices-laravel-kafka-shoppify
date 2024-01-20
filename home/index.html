@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--    <script src="https://cdn.tailwindcss.com"></script>-->
+</head>
+
+<body>
+    <h1 class="text-3xl font-bold underline">
+        # Hubii - Test
+    </h1>
+
+    <h1 id="hubii---challenge">Hubii - Challenge</h1>
+    <p>Estamos procurando um desenvolvedor back-end sênior para se juntar à nossa equipe e ajudar a criar e gerenciar
+        nossos micro-serviços em PHP (Laravel). Este teste técnico tem como objetivo avaliar suas habilidades técnicas
+        nessas áreas.</p>
+    <h2 id="instruções-gerais">Instruções Gerais</h2>
+    <p>Crie três micro-serviços separados usando Laravel: Produto, Pedido e Integração com Shopify.
+        Os serviços devem se comunicar entre si conforme necessário.</p>
+    <p>Implemente autenticação JWT ou OAuth 2.0 para os micro-serviços.</p>
+    <p>Escreva testes unitários e de integração para os micro-serviços.</p>
+    <h3 id="micro-serviço-de-produto">Micro-Serviço de Produto</h3>
+    <p>Implemente um endpoint para a criação de um novo produto. O produto deve ter, no mínimo, um nome, uma descrição e
+        um preço.</p>
+    <p>Implemente um endpoint para listar todos os produtos disponíveis.</p>
+    <p>Implemente um endpoint para atualizar as informações de um produto existente.</p>
+    <h3 id="micro-serviço-de-pedido">Micro-Serviço de Pedido</h3>
+    <p>Implemente um endpoint para a criação de um novo pedido. O pedido deve fazer referência a um ou mais produtos.
+    </p>
+    <p>Implemente um endpoint para listar todos os pedidos realizados.</p>
+    <h3 id="micro-serviço-de-integração">Micro-Serviço de Integração</h3>
+    <p>Implemente uma funcionalidade que sincroniza a lista de produtos entre o micro-serviço de Produto e a loja
+        Shopify. A sincronização deve ocorrer quando um produto é criado, atualizado ou excluído no micro-serviço de
+        Produto.</p>
+    <p>Implemente uma funcionalidade que sincroniza a lista de pedidos entre a loja Shopify e o micro-serviço de Pedido.
+        A sincronização deve ocorrer quando um pedido é feito na loja Shopify.</p>
+    <p>Implemente um sistema de manuseio de erros robusto para lidar com possíveis falhas na comunicação entre os
+        micro-serviços e a loja Shopify.</p>
+    <p>Implemente logs que rastreiem todas as ações realizadas pelo micro-serviço de Integração com Shopify.</p>
+    <br>
+    <br>
+
+    <h2 id="solução">Solução</h2>
+
+    <p><a href="https://api.hubii.local/product" class="link"> Api Produtos: /api/product</a></p>
+    <p><a href="https://api.hubii.local/order" class="link"> Api Pedidos: /order</a></p>
+    <p><a href="https://api.hubii.local/integration" class="link"> Api Integração: /integration</a></p>
+
+    <p>OBS: as apis estão sendo servidas em um NGINX unico mas cada projeto é microserviço a parte com um projeto em
+        laravel para cada um deles conforme solicitado no teste.... para deploy em produção usar o octane atrás do nginx
+    </p>
+
+</body>
+
+</html>
