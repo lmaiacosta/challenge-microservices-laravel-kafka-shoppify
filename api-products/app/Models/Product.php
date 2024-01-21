@@ -46,15 +46,16 @@ class Product extends Model
         'product_type',
         'status',
         'image',
-        'quantity', 
+        'quantity',
     ];
+
 
 
     public function setDateAttribute($value)
     {
         $this->attributes['date'] = date('Y-m-d H:i:s', strtotime($value));
     }
-    
+
     public function getDateAttribute($value)
     {
         return $value ? date('Y-m-d H:i:s', strtotime($value)) : null;

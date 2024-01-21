@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Response;
 
 use Illuminate\Http\Request;
@@ -19,7 +20,7 @@ class ProductController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/products",
+     *     path="/products",
      *     summary="Get a list of products",
      *     tags={"Products"},
      *     @OA\Response(response="200", description="Successful operation", @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/Product"))),
@@ -30,18 +31,12 @@ class ProductController extends Controller
     public function index()
     {
         // Define empty array variable
-        $emptyData = (object)[];
+        $emptyData = (object) [];
         try {
-            // Retrieve all products from the database
             $products = Product::all();
-
-            // Check if products exist
             if ($products->isEmpty()) {
-                // Return a JSON response with a 404 status code and message
                 return response()->json(['message' => 'No products found', 'data' => $emptyData], 404);
             }
-
-            // Return a JSON response with a 200 status code, success message, and data
             return response()->json(['message' => 'Products retrieved successfully', 'data' => $products], 200);
 
         } catch (\Exception $e) {
@@ -58,7 +53,7 @@ class ProductController extends Controller
      */
     /**
      * @OA\Get(
-     *     path="/api/products/{id}",
+     *     path="/products/{id}",
      *     summary="Get a specific product",
      *     tags={"Products"},
      *     @OA\Parameter(
@@ -76,7 +71,7 @@ class ProductController extends Controller
     public function show($id)
     {
         // Define empty array variable
-        $emptyData = (object)[];
+        $emptyData = (object) [];
         try {
             // Find the product by ID
             $product = Product::find($id);
@@ -120,23 +115,33 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // Define empty array variable
-        $emptyData = (object)[];
+        $emptyData = (object) [];
         try {
 
             // Validate the incoming request data
             $validator = Validator::make($request->all(), [
-                'title' => 'required|string|max:255',
-                'desc' => 'required|string',
-                'status' => 'required|in:Publish,Draft',
-                'date' => 'required|date',
-                'category' => 'required|string|max:255',
+                'name'    => 'required|string|max:255',
+                'desc'     => 'required|string',
+                'status'   => 'required|in:Publish,Draft',
+                'date'     => 'required|date'
             ]);
+
+//            $table->id();
+//            $table->string('name');
+//            $table->text('description');
+//            $table->float('price');
+//            $table->string('vendor');
+//            $table->string('product_type');
+//            $table->string('status');
+//            $table->string('image')->nullable();
+//            $table->integer('quantity')->default(0);
+
 
             // Check if validation fails
             if ($validator->fails()) {
                 return response()->json([
                     'message' => $validator->messages()->first(),
-                    'data' => []
+                    'data'    => []
                 ], 422); // 422 Unprocessable Entity
             }
 
@@ -157,7 +162,7 @@ class ProductController extends Controller
             DB::rollBack();
 
             // Return a JSON response with a 500 status code and error message
-            return response()->json(['message' => $e->getMessage(),'data' => $emptyData], 500);
+            return response()->json(['message' => $e->getMessage(), 'data' => $emptyData], 500);
         }
     }
 
@@ -194,7 +199,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         // Define empty array variable
-        $emptyData = (object)[];
+        $emptyData = (object) [];
         try {
             // Find the product by ID
             $product = Product::find($id);
@@ -202,15 +207,15 @@ class ProductController extends Controller
             // Check if product exists
             if (!$product) {
                 // Return a JSON response with a 404 status code and message
-                return response()->json(['message' => 'Product not found','data' => $emptyData], 404);
+                return response()->json(['message' => 'Product not found', 'data' => $emptyData], 404);
             }
 
             // Validate the incoming request data
             $validator = Validator::make($request->all(), [
-                'title' => 'required|string|max:255',
-                'desc' => 'required|string',
-                'status' => 'required|in:Publish,Draft',
-                'date' => 'required|date',
+                'title'    => 'required|string|max:255',
+                'desc'     => 'required|string',
+                'status'   => 'required|in:Publish,Draft',
+                'date'     => 'required|date',
                 'category' => 'required|string|max:255',
             ]);
 
@@ -218,7 +223,7 @@ class ProductController extends Controller
             if ($validator->fails()) {
                 return response()->json([
                     'message' => $validator->messages()->first(),
-                    'data' => $emptyData
+                    'data'    => $emptyData
                 ], 422); // 422 Unprocessable Entity
             }
 
@@ -239,37 +244,15 @@ class ProductController extends Controller
             DB::rollBack();
 
             // Return a JSON response with a 500 status code and error message
-            return response()->json(['message' => $e->getMessage(),'data' => $emptyData], 500);
+            return response()->json(['message' => $e->getMessage(), 'data' => $emptyData], 500);
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\JsonResponse
-     */
-    /**
-     * @OA\Delete(
-     *     path="/api/products/{id}",
-     *     summary="Delete a product",
-     *     tags={"Products"},
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         description="ID of the product",
-     *         @OA\Schema(type="integer")
-     *     ),
-     *     @OA\Response(response="200", description="Product deleted successfully"),
-     *     @OA\Response(response="404", description="Product not found"),
-     *     @OA\Response(response="500", description="Error deleting product")
-     * )
-     */
+
     public function destroy($id)
     {
         // Define empty array variable
-        $emptyData = (object)[];
+        $emptyData = (object) [];
         try {
             // Find the product by ID
             $product = Product::find($id);
@@ -277,7 +260,7 @@ class ProductController extends Controller
             // Check if product exists
             if (!$product) {
                 // Return a JSON response with a 404 status code and message
-                return response()->json(['message' => 'Product not found','data' => $emptyData], 404);
+                return response()->json(['message' => 'Product not found', 'data' => $emptyData], 404);
             }
 
             // Start a database transaction
@@ -290,14 +273,14 @@ class ProductController extends Controller
             DB::commit();
 
             // Return a JSON response with a 200 status code and success message
-            return response()->json(['message' => 'Product deleted successfully','data' => $emptyData], 200);
+            return response()->json(['message' => 'Product deleted successfully', 'data' => $emptyData], 200);
 
         } catch (\Exception $e) {
             // Rollback the database transaction in case of an error
             DB::rollBack();
 
             // Return a JSON response with a 500 status code and error message
-            return response()->json(['message' => $e->getMessage(),'data' => $emptyData], 500);
+            return response()->json(['message' => $e->getMessage(), 'data' => $emptyData], 500);
         }
     }
 }

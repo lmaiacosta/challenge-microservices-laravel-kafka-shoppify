@@ -1,4 +1,5 @@
 .nsfg
 /mysql/data
 /logs
+/BKP
 .env

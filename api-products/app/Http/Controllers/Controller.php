@@ -8,10 +8,7 @@ use Illuminate\Routing\Controller as BaseController;
 use OpenApi\Annotations as OA;
 
 /**
- * @OA\Info(
- *     version="1.0",
- *     title="Api Products - Hubii"
- * )
+ * @OA\Info(title="Api Produtos", version="1.0.0")
  */
 class Controller extends BaseController
 {
