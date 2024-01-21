@@ -17,81 +17,80 @@ services:
       - ./nginx/config/nginx.conf:/etc/nginx/nginx.conf
       - ./home:/var/www/html
       # - ./logs/nginx:/var/log/nginx
-      - ./nginx/certs:/etc/nginx/certs
     depends_on:
       - laravel_product
   laravel_product:
     container_name: hubii_api_product
     build:
-      context: ./api-product/vendor/laravel/sail/runtimes/8.3
+      context: api-products/vendor/laravel/sail/runtimes/8.3
       dockerfile: Dockerfile
       args:
-        WWWGROUP: 1000
+        WWWGROUP: sail
     image: sail-8.3/app
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
       - '8001:80'
     environment:
-      WWWUSER: 1000
+      WWWUSER: sail
       LARAVEL_SAIL: 1
       XDEBUG_MODE: 'develop,debug,coverage'
       XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
       IGNITION_LOCAL_SITES_PATH: '${PWD}'
     volumes:
-      - ./api-product:/var/www/html
+      - ./api-products:/var/www/html
     networks:
       - hubii_dev
     depends_on:
       - db
-#  laravel_order:
-#    container_name: hubii_api_order
-#    build:
-#      context: ./api-order/vendor/laravel/sail/runtimes/8.3
-#      dockerfile: Dockerfile
-#      args:
-#        WWWGROUP: '${WWWGROUP}'
-#    image: sail-8.3/app
-#    extra_hosts:
-#      - 'host.docker.internal:host-gateway'
-#    ports:
-#      - '80'
-#    environment:
-#      WWWUSER: '${WWWUSER}'
-#      LARAVEL_SAIL: 1
-#      XDEBUG_MODE: 'develop,debug,coverage'
-#      XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-#      IGNITION_LOCAL_SITES_PATH: '${PWD}'
-#    volumes:
-#      - ./api-order:/var/www/html
-#    networks:
-#      - hubii_dev
-#    depends_on:
-#      - db
-#  laravel_integration:
-#    container_name: hubii_api_orders
-#    build:
-#      context: ./api-order/vendor/laravel/sail/runtimes/8.3
-#      dockerfile: Dockerfile
-#      args:
-#        WWWGROUP: '${WWWGROUP}'
-#    image: sail-8.3/app
-#    extra_hosts:
-#      - 'host.docker.internal:host-gateway'
-#    ports:
-#      - '80'
-#    environment:
-#      WWWUSER: '${WWWUSER}'
-#      LARAVEL_SAIL: 1
-#      XDEBUG_MODE: 'develop,debug,coverage'
-#      XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-#      IGNITION_LOCAL_SITES_PATH: '${PWD}'
-#    volumes:
-#      - ./api-order:/var/www/html
-#    networks:
-#      - hubii_dev
-#    depends_on:
-#      - db
+  laravel_order:
+    container_name: hubii_api_order
+    build:
+      context: ./api-order/vendor/laravel/sail/runtimes/8.3
+      dockerfile: Dockerfile
+      args:
+        WWWGROUP: sail
+    image: sail-8.3/app
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    ports:
+      - '80'
+    environment:
+      WWWUSER: sail
+      LARAVEL_SAIL: 1
+      XDEBUG_MODE: 'develop,debug,coverage'
+      XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+      IGNITION_LOCAL_SITES_PATH: '${PWD}'
+    volumes:
+      - ./api-order:/var/www/html
+    networks:
+      - hubii_dev
+    depends_on:
+      - db
+  laravel_integration:
+    container_name: hubii_api_orders
+    build:
+      context: ./api-order/vendor/laravel/sail/runtimes/8.3
+      dockerfile: Dockerfile
+      args:
+        WWWGROUP: sail
+    image: sail-8.3/app
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    ports:
+      - '80'
+    environment:
+      WWWUSER: sail
+      LARAVEL_SAIL: 1
+      XDEBUG_MODE: 'develop,debug,coverage'
+      XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+      IGNITION_LOCAL_SITES_PATH: '${PWD}'
+    volumes:
+      - ./api-integration:/var/www/html
+    networks:
+      - hubii_dev
+    depends_on:
+      - db
   db:
     container_name: hubii_mysql
     image: mysql:8.0.35

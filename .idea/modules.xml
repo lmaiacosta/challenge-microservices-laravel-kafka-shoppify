@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/api-product/.idea/api-product.iml" filepath="$PROJECT_DIR$/api-product/.idea/api-product.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/hubii-test.iml" filepath="$PROJECT_DIR$/.idea/hubii-test.iml" />
     </modules>
   </component>

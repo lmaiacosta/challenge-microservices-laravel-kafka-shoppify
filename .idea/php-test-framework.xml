@@ -5,8 +5,8 @@
       <tool tool_name="Pest">
         <settings>
           <configurations>
-            <local_configuration configuration_file_path="$PROJECT_DIR$/api-order/phpunit.xml" executable_path="$PROJECT_DIR$/api-order/vendor/pestphp/pest/bin/pest" use_configuration_file="true" />
             <local_configuration configuration_file_path="$PROJECT_DIR$/api-product/phpunit.xml" executable_path="$PROJECT_DIR$/api-product/vendor/pestphp/pest/bin/pest" use_configuration_file="true" />
+            <local_configuration configuration_file_path="$PROJECT_DIR$/api-order/phpunit.xml" executable_path="$PROJECT_DIR$/api-order/vendor/pestphp/pest/bin/pest" use_configuration_file="true" />
             <local_configuration configuration_file_path="$PROJECT_DIR$/api-integration/phpunit.xml" executable_path="$PROJECT_DIR$/api-integration/vendor/pestphp/pest/bin/pest" use_configuration_file="true" />
           </configurations>
         </settings>
