@@ -2,14 +2,13 @@
 
 namespace App\Models\ModelBase;
 
-use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class ProductBase
  * @package App\Models\ModelBase
- * 
+ *
  * @property integer $id
  * @property string $name
  * @property string $description

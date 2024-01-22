@@ -22,23 +22,23 @@ services:
   laravel_product:
     container_name: hubii_api_product
     build:
-      context: api-products/vendor/laravel/sail/runtimes/8.3
+      context: api-product/vendor/laravel/sail/runtimes/8.2
       dockerfile: Dockerfile
       args:
-        WWWGROUP: sail
-    image: sail-8.3/app
+        WWWGROUP: '${WWWGROUP}'
+    image: sail-8.2/app
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
       - '8001:80'
     environment:
-      WWWUSER: sail
+      WWWUSER: '${WWWUSER}'
       LARAVEL_SAIL: 1
       XDEBUG_MODE: 'develop,debug,coverage'
       XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
       IGNITION_LOCAL_SITES_PATH: '${PWD}'
     volumes:
-      - ./api-products:/var/www/html
+      - ./api-product:/var/www/html
     networks:
       - hubii_dev
     depends_on:
@@ -46,17 +46,17 @@ services:
   laravel_order:
     container_name: hubii_api_order
     build:
-      context: ./api-order/vendor/laravel/sail/runtimes/8.3
+      context: ./api-order/vendor/laravel/sail/runtimes/8.2
       dockerfile: Dockerfile
       args:
-        WWWGROUP: sail
-    image: sail-8.3/app
+        WWWGROUP: '${WWWGROUP}'
+    image: sail-8.2/app
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
-      - '80'
+      - '8002:80'
     environment:
-      WWWUSER: sail
+      WWWUSER: '${WWWUSER}'
       LARAVEL_SAIL: 1
       XDEBUG_MODE: 'develop,debug,coverage'
       XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
@@ -70,17 +70,17 @@ services:
   laravel_integration:
     container_name: hubii_api_orders
     build:
-      context: ./api-order/vendor/laravel/sail/runtimes/8.3
+      context: ./api-order/vendor/laravel/sail/runtimes/8.2
       dockerfile: Dockerfile
       args:
-        WWWGROUP: sail
-    image: sail-8.3/app
+        WWWGROUP: '${WWWGROUP}'
+    image: sail-8.2/app
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
-      - '80'
+      - '8003:80'
     environment:
-      WWWUSER: sail
+      WWWUSER: '${WWWUSER}'
       LARAVEL_SAIL: 1
       XDEBUG_MODE: 'develop,debug,coverage'
       XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'

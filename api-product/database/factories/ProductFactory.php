@@ -22,7 +22,7 @@ class ProductFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         static $index = 0;
         $index += 1;
@@ -50,4 +50,6 @@ class ProductFactory extends Factory
 
         ];
     }
+
+
 }
