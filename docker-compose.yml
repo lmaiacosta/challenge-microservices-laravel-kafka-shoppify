@@ -1,4 +1,4 @@
-services: 
+services:
   nginx:
     container_name: hubii_nginx
     build:
@@ -22,80 +22,98 @@ services:
   laravel_product:
     container_name: hubii_api_product
     build:
-      context: api-product/vendor/laravel/sail/runtimes/8.2
+      context: ./apache
       dockerfile: Dockerfile
       args:
-        WWWGROUP: '${WWWGROUP}'
-    image: sail-8.2/app
+        WWWGROUP: ${WWWGROUP}
+    image: sail-8.3/app
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     ports:
       - '8001:80'
+      - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
     environment:
-      WWWUSER: '${WWWUSER}'
+      WWWUSER: ${WWWUSER}
       LARAVEL_SAIL: 1
-      XDEBUG_MODE: 'develop,debug,coverage'
+      XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
       XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-      IGNITION_LOCAL_SITES_PATH: '${PWD}'
+      IGNITION_LOCAL_SITES_PATH: '${PWD}/api-product'
     volumes:
       - ./api-product:/var/www/html
     networks:
       - hubii_dev
     depends_on:
       - db
-  laravel_order:
-    container_name: hubii_api_order
-    build:
-      context: ./api-order/vendor/laravel/sail/runtimes/8.2
-      dockerfile: Dockerfile
-      args:
-        WWWGROUP: '${WWWGROUP}'
-    image: sail-8.2/app
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
+  # laravel_order:
+  #   container_name: hubii_api_order
+  #   build:
+  #     context: ./api-order/vendor/laravel/sail/runtimes/8.2
+  #     dockerfile: Dockerfile
+  #     args:
+  #       WWWGROUP: '${WWWGROUP}'
+  #   image: sail-8.2/app
+  #   extra_hosts:
+  #     - 'host.docker.internal:host-gateway'
+  #   ports:
+  #     - '8002:80'
+  #   environment:
+  #     WWWUSER: '${WWWUSER}'
+  #     LARAVEL_SAIL: 1
+  #     XDEBUG_MODE: 'develop,debug,coverage'
+  #     XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+  #     IGNITION_LOCAL_SITES_PATH: '${PWD}'
+  #   volumes:
+  #     - ./api-order:/var/www/html
+  #   networks:
+  #     - hubii_dev
+  #   depends_on:
+  #     - db
+  # laravel_integration:
+  #   container_name: hubii_api_orders
+  #   build:
+  #     context: ./api-order/vendor/laravel/sail/runtimes/8.2
+  #     dockerfile: Dockerfile
+  #     args:
+  #       WWWGROUP: '${WWWGROUP}'
+  #   image: sail-8.2/app
+  #   extra_hosts:
+  #     - 'host.docker.internal:host-gateway'
+  #   ports:
+  #     - '8003:80'
+  #   environment:
+  #     WWWUSER: '${WWWUSER}'
+  #     LARAVEL_SAIL: 1
+  #     XDEBUG_MODE: 'develop,debug,coverage'
+  #     XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+  #     IGNITION_LOCAL_SITES_PATH: '${PWD}'
+  #   volumes:
+  #     - ./api-integration:/var/www/html
+  #   networks:
+  #     - hubii_dev
+  #   depends_on:
+  #     - db
+  redis:
+    container_name: hubii_redis
+    image: 'redis:alpine'
+    restart: unless-stopped
     ports:
-      - '8002:80'
-    environment:
-      WWWUSER: '${WWWUSER}'
-      LARAVEL_SAIL: 1
-      XDEBUG_MODE: 'develop,debug,coverage'
-      XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-      IGNITION_LOCAL_SITES_PATH: '${PWD}'
+      - '${FORWARD_REDIS_PORT:-6379}:6379'
     volumes:
-      - ./api-order:/var/www/html
+      - './redis/data:/data'
     networks:
       - hubii_dev
-    depends_on:
-      - db
-  laravel_integration:
-    container_name: hubii_api_orders
-    build:
-      context: ./api-order/vendor/laravel/sail/runtimes/8.2
-      dockerfile: Dockerfile
-      args:
-        WWWGROUP: '${WWWGROUP}'
-    image: sail-8.2/app
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
-    ports:
-      - '8003:80'
-    environment:
-      WWWUSER: '${WWWUSER}'
-      LARAVEL_SAIL: 1
-      XDEBUG_MODE: 'develop,debug,coverage'
-      XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-      IGNITION_LOCAL_SITES_PATH: '${PWD}'
-    volumes:
-      - ./api-integration:/var/www/html
-    networks:
-      - hubii_dev
-    depends_on:
-      - db
+    healthcheck:
+      test:
+        - CMD
+        - redis-cli
+        - ping
+      retries: 3
+      timeout: 5s
   db:
     container_name: hubii_mysql
     image: mysql:8.0.35
     restart: unless-stopped
-    volumes: 
+    volumes:
       - ./mysql/data:/var/lib/mysql
     command: --default-authentication-plugin=mysql_native_password
     environment:
@@ -105,7 +123,7 @@ services:
       MYSQL_PASSWORD: hubii
     ports:
       - "3308:3306"
-    networks: 
+    networks:
       - hubii_dev
 networks:
   hubii_dev:

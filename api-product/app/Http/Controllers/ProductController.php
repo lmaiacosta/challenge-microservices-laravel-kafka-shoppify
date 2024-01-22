@@ -32,13 +32,15 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Create Product.
      *
      * @param CreateProductRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(CreateProductRequest $request)
     {
+        print_r($request);
+        die();
         $item = new Product;
         $item->fill($request->validated());
         $item->save();
@@ -46,7 +48,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Get Product
      *
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
@@ -58,7 +60,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update Product
      *
      * @param int $id
      * @param UpdateProductRequest $request
@@ -72,7 +74,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete Product
      *
      * @param int $id
      * @return \Illuminate\Http\JsonResponse
