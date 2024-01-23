@@ -13,6 +13,9 @@ class TrustHosts extends Middleware
      */
     public function hosts(): array
     {
+        // echo "<pre>";
+        // print_r($this->allSubdomainsOfApplicationUrl());
+        // die();
         return [
             $this->allSubdomainsOfApplicationUrl(),
         ];

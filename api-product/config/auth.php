@@ -13,10 +13,10 @@ return [
     |
     */
 
-//    'defaults' => [
-//        'guard' => 'web',
-//        'passwords' => 'users',
-//    ],
+    'defaults' => [
+        'guard' => 'api',
+        'passwords' => 'users',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -35,12 +35,16 @@ return [
     |
     */
 
-//    'guards' => [
-//        'web' => [
-//            'driver' => 'session',
-//            'provider' => 'users',
-//        ],
-//    ],
+    'guards' => [
+        # <!-----
+        #     Make sure your "api" guard looks like this.
+        #     Newer Laravel versions just removed this config block.
+        #  ---->
+        'api' => [
+            'driver' => 'keycloak',
+            'provider' => 'users',
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -59,17 +63,17 @@ return [
     |
     */
 
-//    'providers' => [
-//        'users' => [
-//            'driver' => 'eloquent',
-//            'model' => App\Models\User::class,
-//        ],
-//
-//        // 'users' => [
-//        //     'driver' => 'database',
-//        //     'table' => 'users',
-//        // ],
-//    ],
+    'providers' => [
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -90,14 +94,14 @@ return [
     |
     */
 
-//    'passwords' => [
-//        'users' => [
-//            'provider' => 'users',
-//            'table' => 'password_reset_tokens',
-//            'expire' => 60,
-//            'throttle' => 60,
-//        ],
-//    ],
+    'passwords' => [
+        'users' => [
+            'provider' => 'users',
+            'table' => 'password_reset_tokens',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -110,6 +114,6 @@ return [
     |
     */
 
-//    'password_timeout' => 10800,
+    'password_timeout' => 10800,
 
 ];

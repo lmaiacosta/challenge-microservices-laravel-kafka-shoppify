@@ -7,37 +7,14 @@
     },
     "servers": [
         {
-            "url": "http://hubii_api_product/api",
+            "url": "https://product.hubii.local/api",
             "description": "API_PRODUCT Server #1"
         }
     ],
     "paths": {
         "/products": {
-            "get": {
-                "summary": "Get Products",
-                "description": "",
-                "deprecated": false,
-                "responses": {
-                    "200": {
-                        "description": "Get Products",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Product"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "(Unauthorized) Invalid or missing Access Token"
-                    }
-                },
-                "tags": [
-                    "products"
-                ]
-            },
             "post": {
-                "summary": "Store a newly created resource in storage.",
+                "summary": "Create Product.",
                 "description": "",
                 "deprecated": false,
                 "responses": {
@@ -98,11 +75,34 @@
                 "tags": [
                     "products"
                 ]
+            },
+            "get": {
+                "summary": "Get Products",
+                "description": "",
+                "deprecated": false,
+                "responses": {
+                    "200": {
+                        "description": "Get Products",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Product"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "(Unauthorized) Invalid or missing Access Token"
+                    }
+                },
+                "tags": [
+                    "products"
+                ]
             }
         },
         "/products/{id}": {
             "get": {
-                "summary": "Display the specified resource.",
+                "summary": "Get Product",
                 "description": "",
                 "deprecated": false,
                 "responses": {
@@ -129,7 +129,7 @@
                 ]
             },
             "put": {
-                "summary": "Update the specified resource in storage.",
+                "summary": "Update Product",
                 "description": "",
                 "deprecated": false,
                 "responses": {
@@ -203,7 +203,7 @@
                 ]
             },
             "delete": {
-                "summary": "Remove the specified resource from storage.",
+                "summary": "Delete Product",
                 "description": "",
                 "deprecated": false,
                 "responses": {
@@ -241,7 +241,7 @@
                         "type": "integer",
                         "description": "integer",
                         "nullable": false,
-                        "example": 1463485140
+                        "example": 1735065483
                     },
                     "name": {
                         "type": "string",
@@ -284,7 +284,7 @@
                         "type": "integer",
                         "description": "integer",
                         "nullable": false,
-                        "example": 1548233836
+                        "example": 1995380904
                     },
                     "image": {
                         "type": "string",
@@ -321,7 +321,7 @@
                         "type": "integer",
                         "description": "integer",
                         "nullable": false,
-                        "example": 1481376816
+                        "example": 1538761083
                     },
                     "name": {
                         "type": "string",
@@ -364,7 +364,7 @@
                         "type": "integer",
                         "description": "integer",
                         "nullable": false,
-                        "example": 1844104873
+                        "example": 1526062892
                     },
                     "image": {
                         "type": "string",

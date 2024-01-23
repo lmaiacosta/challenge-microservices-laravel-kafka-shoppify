@@ -15,16 +15,6 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-
-    /**
-     * Get Products
-     *
-     * @Response(
-     *    code: 200
-     *    description: Get Products
-     *    ref: Product
-     * )
-     */     
     public function index()
     {
         $page = Product::query()->paginate();
