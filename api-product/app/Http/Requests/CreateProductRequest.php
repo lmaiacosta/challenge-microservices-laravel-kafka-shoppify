@@ -37,24 +37,18 @@ class CreateProductRequest extends FormRequest
      */
     public function rules()
     {
+        
         return [
-
-            'name' => ['required', 'regex:/^[A-Za-z]+$/'],
-
-            'description' => ['required'],
-
-            'price' => ['numeric', 'required'],
-
-            'vendor' => ['required'],
-
-            'product_type' => ['required'],
-
+            'name' => ['required','min:3'],
+            'description' => ['nullable'],
+            'price' => ['numeric', 'nullable'],
+            'vendor' => ['nullable'],
+            'product_type' => ['nullable'],
             'status' => ['required', 'max:20'],
-
-            'quantity' => ['integer', 'required'],
-
-            'image' => ['image', 'required'],
-
+            'quantity' => ['integer', 'nullable'],
+            'image' => ['url', 'nullable'],
         ];
     }
 }
+
+

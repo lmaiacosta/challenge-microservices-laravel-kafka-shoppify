@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DocsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::domain('/*')->group(function () {
+//    return ':){account}';
+// });
+// https://keycloak.hubii.local/
+// // Route::middleware(['keycloak', 'auth'])->group(function () {
+// //     Route::get('/docs/{path?}','')->where('path', '.*');
+// });
+// https://product.ubii.local/localtelescope/telescope-ap
+
+// dd(config()->all());
 Route::get('/', function () {
    return view('welcome');
 });
+
+
+// Route::get('login/keycloak', 'LoginController@redirectToKeycloak')->name('login.keycloak');
+// Route::get('login/keycloak/callback', 'LoginController@handleKeycloakCallback');
+
+
+// Route::get('docs/api', function () {
+   
+// });

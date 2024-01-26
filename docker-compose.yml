@@ -38,13 +38,14 @@ services:
       LARAVEL_SAIL: 1
       XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
       XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-      IGNITION_LOCAL_SITES_PATH: '${PWD}/api-product'
+      # IGNITION_LOCAL_SITES_PATH: '${PWD}/api-product'
     volumes:
       - ./api-product:/var/www/html
     networks:
       - hubii_dev
     depends_on:
       - db
+      - redis
 
   # laravel_order:
   #   container_name: hubii_api_order
@@ -111,26 +112,23 @@ services:
         - ping
       retries: 3
       timeout: 5s
-
   keycloak:
     image: quay.io/keycloak/keycloak:23.0.4
     container_name: hubii_keycloak
     restart: unless-stopped
-    volumes:
-      - ./keycloak/data:/opt/keycloak/data/
+    # volumes:
+    #   - ./keycloak/data:/opt/keycloak/data/
     environment:
       KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: admin
-      KEYCLOAK_DATABASE: MYSQL
-      KEYCLOAK_DB_VENDOR: MYSQL
-      KEYCLOAK_DB_ADDR: hubii_mysql # MySQL server address
-      KEYCLOAK_DB_PORT: 3306 # MySQL server port
-      KEYCLOAK_DB_DATABASE: hubii_test # MySQL database name
-      KEYCLOAK_DB_USER: hubii # MySQL database user
-      KEYCLOAK_DB_PASSWORD: hubii # MySQL database password
-      KEYCLOAK_FRONTEND_URL: https://hubii.keycloak.local/auth
-      KEYCLOAK_PROXY_ADDRESS_FORWARDING: true 
-    command: [ "start-dev", '--hostname-strict=false']
+      KEYCLOAK_ADMIN_PASSWORD: admin    
+      KC_DB: "mysql"
+      KC_DB_URL: 'jdbc:mysql://hubii_mysql:3306/hubii_keycloak'
+      KC_DB_USERNAME: root
+      KC_DB_PASSWORD: root      
+      KC_HOSTNAME_STRICT: false
+      KC_PROXY: edge
+    # entrypoint: /opt/keycloak/bin/kc.sh start-dev 
+    command: [ "start-dev"]
     ports:
       - 8080:8080
     depends_on:
@@ -142,11 +140,13 @@ services:
     image: mysql:8.0.35
     restart: unless-stopped
     volumes:
-      - ./mysql/data:/var/lib/mysql
+      - 'hubbi-mysql:/var/lib/mysql'
+      - ./mysql/data/init-scripts:/docker-entrypoint-initdb.d      
+      # - ./mysql/data:/var/lib/mysql
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: hubii_test
+      # MYSQL_DATABASE: hubii_keycloak,hubii_products,hubii_orders
       MYSQL_USER: hubii
       MYSQL_PASSWORD: hubii
     ports:
@@ -156,3 +156,6 @@ services:
 networks:
   hubii_dev:
     driver: bridge
+volumes:
+  hubbi-mysql:
+      driver: local

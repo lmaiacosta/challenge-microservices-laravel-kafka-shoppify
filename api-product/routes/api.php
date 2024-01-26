@@ -26,6 +26,14 @@ Route::get('/hello', function () {
     return ':)';
 });
 
+// $token = Auth::token();
+// die('aqui: '. $token);
+// Route::group(['middleware' => 'auth:api'], function () {
+
+//     Route::get('/protected-endpoint', 'SecretController@index');
+//     // more endpoints ...
+// });
+
 // // protected endpoints
 // Route::group(['middleware' => 'auth:api'], function () {
 //     Route::get('/protected-endpoint', 'SecretController@index');
@@ -33,7 +41,9 @@ Route::get('/hello', function () {
 // });
 
 // protected endpoints
-Route::group(['middleware' => 'auth:api'], function () {
+// Route::group(['middleware' => 'auth:api'], function () {
+
+Route::group(['middleware' => 'auth:api'], function () {    
     Route::controller(ProductController::class)->group(function () {
         Route::post('/products', 'store');
         Route::get('/products', 'index');

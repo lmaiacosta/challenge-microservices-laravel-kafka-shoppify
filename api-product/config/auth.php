@@ -36,14 +36,14 @@ return [
     */
 
     'guards' => [
-        # <!-----
-        #     Make sure your "api" guard looks like this.
-        #     Newer Laravel versions just removed this config block.
-        #  ---->
+        'web' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
         'api' => [
             'driver' => 'keycloak',
             'provider' => 'users',
-        ],
+        ],        
     ],
 
     /*

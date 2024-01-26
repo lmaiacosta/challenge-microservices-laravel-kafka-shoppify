@@ -1,9 +1,8 @@
 <?php
 
 use Dedoc\Scramble\Http\Middleware\RestrictedDocsAccess;
-// echo "<pre>";
-// print_r($_ENV );
-// die();
+// use App\Http\Middleware\KeycloakAuthMiddleware;
+
 return [
     /*
      * Your API path. By default, all routes starting with this path will be added to the docs.
@@ -26,7 +25,7 @@ return [
         /*
          * Description rendered on the home page of the API documentation (`/docs/api`).
          */
-        'description' => '',
+        'description' => 'Api Produtos',
     ],
 
     /*
@@ -41,7 +40,7 @@ return [
         /*
          * URL to an image that displays as a small square logo next to the title, above the table of contents.
          */
-        'logo' => '',
+        'logo' => 'https://fpinfo.com.br/_next/static/media/01.2028ba01.png',
 
         /*
          * Use to fetch the credential policy for the Try It feature. Options are: omit, include (default), and same-origin
@@ -67,6 +66,7 @@ return [
 
     'middleware' => [
         'web',
+        // KeycloakAuthMiddleware::class, // Add Keycloak middleware here
         RestrictedDocsAccess::class,
     ],
 

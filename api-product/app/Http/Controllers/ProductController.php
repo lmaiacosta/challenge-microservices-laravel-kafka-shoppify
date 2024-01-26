@@ -29,9 +29,10 @@ class ProductController extends Controller
      */
     public function store(CreateProductRequest $request)
     {
-        print_r($request);
-        die();
+        // print_r($request);
+        // die();
         $item = new Product;
+        // dd($item);
         $item->fill($request->validated());
         $item->save();
         return response()->json(compact('item'));

@@ -4,7 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<Product>
  */
@@ -24,30 +25,19 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        static $index = 0;
-        $index += 1;
+        // static $index = 0;
+        // $index += 1;
         return [
-
-            'name' => $this->faker->name,
-
-            'description' => $this->faker->randomHtml(),
-
-            'price' => $this->faker->randomFloat(2,10,1000),
-
-            'vendor' => $this->faker->word,
-
-            'product_type' => $this->faker->word,
-
-            'status' => $this->faker->randomKey(['deleted', 'published', 'draft']),
-
-            'quantity' => $this->faker->randomNumber(),
-
-            'image' => $this->faker->unique()->imageUrl(),
-
-            'created_at' => $this->faker->dateTime,
-
-            'updated_at' => $this->faker->dateTime,
-
+            'name' => fake()->word,
+            'description' =>fake()->randomHtml(),
+            'price' =>fake()->randomFloat(2,10,1000),
+            'vendor' =>fake()->word,
+            'product_type' =>fake()->word,
+            'status' =>fake()->randomKey(['deleted', 'published', 'draft']),
+            'quantity' =>fake()->randomNumber(),
+            'image' =>fake()->unique()->imageUrl(),
+            'created_at' =>fake()->dateTime,
+            'updated_at' =>fake()->dateTime,
         ];
     }
 

@@ -30,7 +30,7 @@ class ProductBase extends Model
      *
      * @var string
      */
-    protected $table = 'product';
+    protected $table = 'products';
 
     /**
      * The primary key for the model.
