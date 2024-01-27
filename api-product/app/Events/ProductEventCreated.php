@@ -1,6 +1,6 @@
 <?php
 
-// App\Events\ProductCreated.php
+// App\Events\ProductEventCreated.php
 
 namespace App\Events;
 
@@ -8,7 +8,7 @@ use App\Models\Product;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ProductCreated
+class ProductEventCreated
 {
     use Dispatchable, SerializesModels;
 

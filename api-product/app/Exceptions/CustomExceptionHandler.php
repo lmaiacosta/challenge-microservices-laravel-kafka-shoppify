@@ -9,15 +9,15 @@ use Throwable;
 class CustomExceptionHandler extends ExceptionHandler
 {
     // Implement the render method to handle exceptions
-    public function render($request, Throwable $exception)
+    public function render($request, Throwable $e)
     {
         // Check if the exception is of type TokenException
-        if ($exception instanceof TokenExceptionAlias) {
+        if ($e instanceof TokenExceptionAlias) {
             // Return a custom JSON response
             return response()->json([
                 'message'   => 'Unauthorized',
                 'exception' => 'KeycloakGuard\\Exceptions\\TokenException',
-                'description' => $exception->getMessage(),
+                'description' => $e->getMessage(),
 //                'file'      => $exception->getFile(),
 //                'line'      => $exception->getLine(),
 //                'trace'     => $exception->getTrace(),
@@ -25,6 +25,6 @@ class CustomExceptionHandler extends ExceptionHandler
         }
 
         // For other exceptions, let Laravel handle them
-        return parent::render($request, $exception);
+        return parent::render($request, $e);
     }
 }

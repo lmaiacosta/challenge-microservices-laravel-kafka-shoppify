@@ -11,6 +11,7 @@
         "guzzlehttp/guzzle": "^7.8",
         "laravel/framework": "^10.10",
         "laravel/tinker": "^2.8",
+        "predis/predis": "^2.2",
         "robsontenorio/laravel-keycloak-guard": "^1.4",
         "tymon/jwt-auth": "^2.0"
     },

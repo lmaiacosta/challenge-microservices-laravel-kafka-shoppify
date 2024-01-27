@@ -4,6 +4,7 @@ namespace App\Models\ModelBase;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+//use Database\Factories\ProductFactory;
 
 /**
  * Class ProductBase

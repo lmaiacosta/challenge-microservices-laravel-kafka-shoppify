@@ -1,6 +1,6 @@
 <?php
 
-// App\Events\ProductCreated.php
+// App\Events\ProductEventCreated.php
 
 namespace App\Events;
 
