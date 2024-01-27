@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\KeycloakController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,24 +28,9 @@ Route::get('/hello', function () {
     return ':)';
 });
 
-// $token = Auth::token();
-// die('aqui: '. $token);
-// Route::group(['middleware' => 'auth:api'], function () {
+Route::post('/getToken', [KeycloakController::class, 'index']);
 
-//     Route::get('/protected-endpoint', 'SecretController@index');
-//     // more endpoints ...
-// });
-
-// // protected endpoints
-// Route::group(['middleware' => 'auth:api'], function () {
-//     Route::get('/protected-endpoint', 'SecretController@index');
-//     // more endpoints ...
-// });
-
-// protected endpoints
-// Route::group(['middleware' => 'auth:api'], function () {
-
-Route::group(['middleware' => 'auth:api'], function () {    
+Route::group(['middleware' => 'auth:api'], function () {
     Route::controller(ProductController::class)->group(function () {
         Route::post('/products', 'store');
         Route::get('/products', 'index');

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class UpdateProductRequest
  * @package App\Http\Requests
- * 
+ *
  * @property string $name
  * @property string $description
  * @property float $price
@@ -38,23 +38,14 @@ class UpdateProductRequest extends FormRequest
     public function rules()
     {
         return [
-
-            'name' => ['required', 'regex:/^[A-Za-z]+$/'],
-
-            'description' => ['required'],
-
-            'price' => ['numeric', 'required'],
-
-            'vendor' => ['required'],
-
-            'product_type' => ['required'],
-
-            'status' => ['required', 'max:20'],
-
-            'quantity' => ['integer', 'required'],
-
-            'image' => ['image', 'required'],
-
+            'name' => ['required','min:3'],
+            'description' => ['nullable'],
+            'price' => ['numeric', 'nullable'],
+            'vendor' => ['nullable'],
+            'product_type' => ['nullable'],
+            'status' => ['required', 'in:deleted,published,draft'],
+            'quantity' => ['integer', 'nullable'],
+            'image' => ['url', 'nullable'],
         ];
     }
 }

@@ -3,6 +3,9 @@
 namespace App\Observers;
 
 use App\Models\Product;
+use App\Events\ProductCreated;
+use App\Events\ProductDeleted;
+use App\Events\ProductUpdated;
 
 class ProductObserver
 {
@@ -14,7 +17,7 @@ class ProductObserver
      */
     public function created(Product $item)
     {
-        //
+        event(new ProductCreated($item));
     }
 
     /**
@@ -25,7 +28,7 @@ class ProductObserver
      */
     public function updated(Product $item)
     {
-        //
+        event(new ProductUpdated($item));
     }
 
     /**
@@ -36,28 +39,6 @@ class ProductObserver
      */
     public function deleted(Product $item)
     {
-        //
-    }
-
-    /**
-     * Handle the item "restored" event.
-     *
-     * @param  Product $item
-     * @return void
-     */
-    public function restored(Product $item)
-    {
-        //
-    }
-
-    /**
-     * Handle the item "force deleted" event.
-     *
-     * @param  Product $item
-     * @return void
-     */
-    public function forceDeleted(Product $item)
-    {
-        //
+        event(new ProductDeleted($item));
     }
 }

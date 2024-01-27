@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'api',
+        'guard' => 'web',
         'passwords' => 'users',
     ],
 
@@ -41,18 +41,6 @@ return [
             'provider' => 'users',
         ],
     ],
-
-
-    // 'guards' => [
-    //     'web' => [
-    //         'driver' => 'api',
-    //         'provider' => 'users',
-    //     ],
-    //     'api' => [
-    //         'driver' => 'keycloak',
-    //         'provider' => 'users',
-    //     ]
-    // ],
 
     /*
     |--------------------------------------------------------------------------

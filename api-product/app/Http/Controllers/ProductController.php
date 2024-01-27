@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
@@ -13,7 +13,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function index()
     {
@@ -25,14 +25,11 @@ class ProductController extends Controller
      * Create Product.
      *
      * @param CreateProductRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function store(CreateProductRequest $request)
     {
-        // print_r($request);
-        // die();
         $item = new Product;
-        // dd($item);
         $item->fill($request->validated());
         $item->save();
         return response()->json(compact('item'));
@@ -42,7 +39,7 @@ class ProductController extends Controller
      * Get Product
      *
      * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function show($id)
     {
@@ -55,7 +52,7 @@ class ProductController extends Controller
      *
      * @param int $id
      * @param UpdateProductRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update($id, UpdateProductRequest $request)
     {
@@ -68,7 +65,7 @@ class ProductController extends Controller
      * Delete Product
      *
      * @param int $id
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function destroy($id)
     {

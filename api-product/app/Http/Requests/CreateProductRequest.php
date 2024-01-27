@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 /**
  * Class CreateProductRequest
  * @package App\Http\Requests
- * 
+ *
  * @property string $name
  * @property string $description
  * @property float $price
@@ -35,16 +35,15 @@ class CreateProductRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
-        
         return [
             'name' => ['required','min:3'],
             'description' => ['nullable'],
             'price' => ['numeric', 'nullable'],
             'vendor' => ['nullable'],
             'product_type' => ['nullable'],
-            'status' => ['required', 'max:20'],
+            'status' => ['required', 'in:deleted,published,draft'],
             'quantity' => ['integer', 'nullable'],
             'image' => ['url', 'nullable'],
         ];

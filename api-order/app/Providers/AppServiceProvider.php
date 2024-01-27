@@ -19,12 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if($this->app->environment('local.docker')) {
-            \URL::forceScheme('https');
-        }
-        if($this->app->environment('production')) {
-            \URL::forceScheme('https');
-        }
         //
     }
 }
