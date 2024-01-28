@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Jobs\ProductIntegrationJob;
 use App\Models\Product;
 use App\Events\ProductEventCreated;
 use App\Events\ProductDeleted;
@@ -14,37 +15,35 @@ class ProductObserver implements ShouldHandleEventsAfterCommit
     /**
      * Handle the item "created" event.
      *
-     * @param  Product $item
+     * @param  Product $product
      * @return void
      */
-    public function created(Product $item)
+    public function created(Product $product): void
     {
-//        ProductEventCreated::dispatch($item);
-        Queue::push(function () use ($item) {
-            event(new ProductEventCreated($item));
-        });
-
+        dispatch(new ProductIntegrationJob($product));
     }
 
     /**
      * Handle the item "updated" event.
      *
-     * @param  Product $item
+     * @param  Product $product
      * @return void
      */
-    public function updated(Product $item)
+    public function updated(Product $product): void
     {
-        event(new ProductUpdated($item));
+        dispatch(new ProductIntegrationJob($product));
+//        event(new ProductUpdated($product));
     }
 
     /**
      * Handle the item "deleted" event.
      *
-     * @param  Product $item
+     * @param  Product $product
      * @return void
      */
-    public function deleted(Product $item)
+    public function deleted(Product $product): void
     {
-        event(new ProductDeleted($item));
+        dispatch(new ProductIntegrationJob($product));
+//        event(new ProductDeleted($product));
     }
 }

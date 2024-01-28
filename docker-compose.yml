@@ -71,30 +71,32 @@ services:
   #     - hubii_dev
   #   depends_on:
   #     - db
-  # laravel_integration:
-  #   container_name: hubii_api_orders
-  #   build:
-  #     context: ./api-order/vendor/laravel/sail/runtimes/8.2
-  #     dockerfile: Dockerfile
-  #     args:
-  #       WWWGROUP: '${WWWGROUP}'
-  #   image: sail-8.2/app
-  #   extra_hosts:
-  #     - 'host.docker.internal:host-gateway'
-  #   ports:
-  #     - '8003:80'
-  #   environment:
-  #     WWWUSER: '${WWWUSER}'
-  #     LARAVEL_SAIL: 1
-  #     XDEBUG_MODE: 'develop,debug,coverage'
-  #     XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-  #     IGNITION_LOCAL_SITES_PATH: '${PWD}'
-  #   volumes:
-  #     - ./api-integration:/var/www/html
-  #   networks:
-  #     - hubii_dev
-  #   depends_on:
-  #     - db
+  laravel_integration:
+    container_name: hubii_api_integration
+    build:
+      context: ./apache
+      dockerfile: Dockerfile
+      args:
+        WWWGROUP: ${WWWGROUP}
+    image: sail-8.3/app
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    ports:
+      - '8003:80'
+      - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+    environment:
+      WWWUSER: ${WWWUSER}
+      LARAVEL_SAIL: 1
+      XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+      XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
+      # IGNITION_LOCAL_SITES_PATH: '${PWD}/api-product'
+    volumes:
+      - ./api-integration:/var/www/html
+    networks:
+      - hubii_dev
+    depends_on:
+      - db
+      - redis
   redis:
     container_name: hubii_redis
     image: 'redis:alpine'
