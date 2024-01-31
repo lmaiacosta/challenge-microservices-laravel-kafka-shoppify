@@ -28,16 +28,16 @@ class ProductFactory extends Factory
         // static $index = 0;
         // $index += 1;
         return [
-            'name' => fake()->word,
-            'description' =>fake()->randomHtml(),
+            'name' => fake()->words(3,true). ' '.fake()->randomElement(['Shirt', 'Shoes', 'Hat', 'Bag']),
+            'description' =>fake()->realText(300),
             'price' =>fake()->randomFloat(2,10,1000),
-            'vendor' =>fake()->word,
-            'product_type' =>fake()->word,
-            'status' =>fake()->randomKey(['deleted', 'published', 'draft']),
-            'quantity' =>fake()->randomNumber(),
+            'vendor' => 'FPInfo',
+            'product_type' =>fake()->randomElement(['dog','cat','bird']),
+            'status' =>fake()->randomElement(['active','archived','draft']),
+            'quantity' =>fake()->randomNumber(1,3),
             'image' =>fake()->unique()->imageUrl(),
-            'created_at' =>fake()->dateTime,
-            'updated_at' =>fake()->dateTime,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 

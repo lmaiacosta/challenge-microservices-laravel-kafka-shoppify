@@ -9,6 +9,7 @@ use Illuminate\Foundation\Http\FormRequest;
  * Class CreateProductRequest
  * @package App\Http\Requests
  *
+ * @property integer $id_shopify
  * @property string $name
  * @property string $description
  * @property float $price
@@ -43,10 +44,11 @@ class CreateProductRequest extends FormRequest
             'price' => ['numeric', 'nullable'],
             'vendor' => ['nullable'],
             'product_type' => ['nullable'],
-            'status' => ['required', 'in:deleted,published,draft'],
+            'status' => ['required', 'in:active,archived,draft'],
             'quantity' => ['integer', 'nullable'],
             'image' => ['url', 'nullable'],
         ];
+
     }
 }
 

@@ -29,9 +29,19 @@ class CreateTokenRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'username' => ['required','string'],
-            'password' => ['required','string']
-        ];
+        return array(
+            /**
+             * Login
+             * @var string
+             * @example leonardo
+             */
+            'username' => array('required','string'),
+            /**
+             * Password
+             * @var string
+             * @example a1b2c3
+             */
+            'password' => array('required','string')
+        );
     }
 }

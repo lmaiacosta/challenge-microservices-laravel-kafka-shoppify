@@ -43,7 +43,7 @@ class UpdateProductRequest extends FormRequest
             'price' => ['numeric', 'nullable'],
             'vendor' => ['nullable'],
             'product_type' => ['nullable'],
-            'status' => ['required', 'in:deleted,published,draft'],
+            'status' => ['required', 'in:active,archived,draft'],
             'quantity' => ['integer', 'nullable'],
             'image' => ['url', 'nullable'],
         ];

@@ -60,23 +60,14 @@ class ProductBase extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-
         'name',
-
         'description',
-
         'price',
-
         'vendor',
-
         'product_type',
-
         'status',
-
         'quantity',
-
         'image',
-
     ];
 
     /**
@@ -99,28 +90,17 @@ class ProductBase extends Model
     public static function keys(): array
     {
         return [
-
             'id',
-
             'name',
             'description',
-
             'price',
-
             'vendor',
-
             'product_type',
-
             'status',
-
             'quantity',
-
             'image',
-
             'created_at',
-
             'updated_at',
-
         ];
     }
 }

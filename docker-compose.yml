@@ -1,3 +1,4 @@
+version: "3.1"
 services:
   nginx:
     container_name: hubii_nginx
@@ -46,7 +47,6 @@ services:
     depends_on:
       - db
       - redis
-
   # laravel_order:
   #   container_name: hubii_api_order
   #   build:
@@ -81,9 +81,11 @@ services:
     image: sail-8.3/app
     extra_hosts:
       - 'host.docker.internal:host-gateway'
+    command: 
+      - php artisan queue:work --queue=integration_queue
     ports:
       - '8003:80'
-      # - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+      - '${VITE_PORT:-5174}:${VITE_PORT:-5173}'
     environment:
       WWWUSER: ${WWWUSER}
       LARAVEL_SAIL: 1
@@ -157,7 +159,6 @@ services:
       - hubii_dev
 networks:
   hubii_dev:
-    driver: bridge
 volumes:
   hubbi-mysql:
       driver: local

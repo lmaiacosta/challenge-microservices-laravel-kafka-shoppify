@@ -50,11 +50,11 @@ class ProductController extends Controller
     /**
      * Update Product
      *
-     * @param int $id
+     * @param  int  $id
      * @param UpdateProductRequest $request
      * @return JsonResponse
      */
-    public function update($id, UpdateProductRequest $request)
+    public function update(int $id, UpdateProductRequest $request)
     {
         $item = Product::query()->findOrFail($id);
         $item->update($request->validated());

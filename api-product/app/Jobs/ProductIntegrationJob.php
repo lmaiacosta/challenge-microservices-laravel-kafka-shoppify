@@ -12,18 +12,17 @@ use Illuminate\Support\Facades\Redis;
 
 class ProductIntegrationJob implements ShouldQueue
 {
-    public $product;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    protected $product;
 
     public function __construct($product)
     {
         $this->product = $product;
     }
 
-    public function handle()
+    public function handle(): void
     {
-        Redis::connection()->rpush('integration_queue', json_encode([
-            'action' => 'sync_product',
-            'product' => $this->product->toArray(),
-        ]));
+
     }
 }

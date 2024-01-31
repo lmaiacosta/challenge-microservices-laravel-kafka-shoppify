@@ -17,7 +17,7 @@ class KeycloakController extends Controller
      *
      * Get Token
      *
-     * @return JsonResponse
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|\Illuminate\Http\Response
      *
      * @unauthenticated
      *

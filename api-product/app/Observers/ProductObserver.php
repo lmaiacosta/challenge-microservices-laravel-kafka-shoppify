@@ -4,11 +4,8 @@ namespace App\Observers;
 
 use App\Jobs\ProductIntegrationJob;
 use App\Models\Product;
-use App\Events\ProductEventCreated;
-use App\Events\ProductDeleted;
-use App\Events\ProductUpdated;
 use Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
-use Illuminate\Support\Facades\Queue;
+// use Illuminate\Support\Facades\Queue;
 
 class ProductObserver implements ShouldHandleEventsAfterCommit
 {
@@ -20,9 +17,9 @@ class ProductObserver implements ShouldHandleEventsAfterCommit
      */
     public function created(Product $product): void
     {
-        dispatch(new ProductIntegrationJob($product));
+        $dataToSend = $product->toArray();
+        ProductIntegrationJob::dispatch($dataToSend)->onQueue('integration_queue');
     }
-
     /**
      * Handle the item "updated" event.
      *
@@ -31,8 +28,9 @@ class ProductObserver implements ShouldHandleEventsAfterCommit
      */
     public function updated(Product $product): void
     {
-        dispatch(new ProductIntegrationJob($product));
-//        event(new ProductUpdated($product));
+        $dataToSend = $product->toArray();
+        ProductIntegrationJob::dispatch($dataToSend)->onQueue('integration_queue');
+
     }
 
     /**
@@ -43,7 +41,7 @@ class ProductObserver implements ShouldHandleEventsAfterCommit
      */
     public function deleted(Product $product): void
     {
-        dispatch(new ProductIntegrationJob($product));
-//        event(new ProductDeleted($product));
+        $dataToSend = $product->toArray();
+        ProductIntegrationJob::dispatch($dataToSend)->onQueue('integration_queue');
     }
 }
