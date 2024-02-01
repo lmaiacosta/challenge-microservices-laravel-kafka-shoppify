@@ -7,4 +7,4 @@
 /.idea/
 /.vscode
 /redis/data
-/keycloak/data
+!/keycloak/data/import
