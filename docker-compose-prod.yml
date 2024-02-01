@@ -133,7 +133,7 @@ services:
       KC_HOSTNAME_STRICT: false
       KC_PROXY: edge
     # entrypoint: /opt/keycloak/bin/kc.sh start-dev 
-    command: [ "start-dev --import-realm"]
+    command: ["start-dev", "--import-realm"]
     ports:
       - 8080
     depends_on:
