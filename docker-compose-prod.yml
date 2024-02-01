@@ -32,8 +32,8 @@ services:
     # extra_hosts:
     #   - 'host.docker.internal:host-gateway'
     ports:
-      # - '8001:80'
-      - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+      - '80'
+      - '5174'
     environment:
       WWWUSER: ${WWWUSER}
       LARAVEL_SAIL: 1
@@ -79,14 +79,13 @@ services:
       dockerfile: Dockerfile
       args:
         WWWGROUP: ${WWWGROUP}
-    image: sail-8.3/app
     extra_hosts:
       - 'host.docker.internal:host-gateway'
     # command: 
     #   - php artisan queue:work --queue=integration_queue
     ports:
-      - '8003:80'
-      - '${VITE_PORT:-5174}:${VITE_PORT:-5173}'
+      - '80'
+      - '5174'
     environment:
       WWWUSER: ${WWWUSER}
       LARAVEL_SAIL: 1
@@ -122,8 +121,8 @@ services:
     image: quay.io/keycloak/keycloak:23.0.4
     container_name: hubii_keycloak
     restart: unless-stopped
-    # volumes:
-    #   - ./keycloak/data:/opt/keycloak/data/
+    volumes:
+      - ./keycloak/data/import:/opt/keycloak/data/import
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin    
@@ -134,9 +133,9 @@ services:
       KC_HOSTNAME_STRICT: false
       KC_PROXY: edge
     # entrypoint: /opt/keycloak/bin/kc.sh start-dev 
-    command: [ "start-dev"]
+    command: [ "start-dev --import-realm"]
     ports:
-      - 8080:8080
+      - 8080
     depends_on:
       - db
     networks:
