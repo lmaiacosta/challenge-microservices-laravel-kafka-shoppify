@@ -8,8 +8,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('shopify_product', function (Blueprint $table) {
-            $table->integer('id_product')->nullable(false);
-            $table->integer('id_shopify')->nullable(false);
+            $table->bigInteger('id_product')->nullable(false);
+            $table->bigInteger('id_shopify')->nullable(false);
             $table->json('all')->nullable();
             $table->timestamps();
             $table->unique(['id_product', 'id_shopify']);

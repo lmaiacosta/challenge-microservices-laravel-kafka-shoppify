@@ -28,9 +28,9 @@ services:
       dockerfile: Dockerfile
       args:
         WWWGROUP: ${WWWGROUP}
-    image: sail-8.3/app
-    extra_hosts:
-      - 'host.docker.internal:host-gateway'
+    # image: sail-8.3/app
+    # extra_hosts:
+    #   - 'host.docker.internal:host-gateway'
     ports:
       - '8001:80'
       - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
@@ -47,6 +47,7 @@ services:
     depends_on:
       - db
       - redis
+      - kafka
   # laravel_order:
   #   container_name: hubii_api_order
   #   build:
@@ -81,8 +82,8 @@ services:
     image: sail-8.3/app
     extra_hosts:
       - 'host.docker.internal:host-gateway'
-    command: 
-      - php artisan queue:work --queue=integration_queue
+    # command: 
+    #   - php artisan queue:work --queue=integration_queue
     ports:
       - '8003:80'
       - '${VITE_PORT:-5174}:${VITE_PORT:-5173}'
@@ -99,6 +100,7 @@ services:
     depends_on:
       - db
       - redis
+      - kafka
   redis:
     container_name: hubii_redis
     image: 'redis:alpine'
@@ -157,8 +159,48 @@ services:
       - "3308:3306"
     networks:
       - hubii_dev
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    networks: 
+      - broker-kafka
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    networks: 
+      - broker-kafka
+      - hubii_dev
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop:latest
+    networks: 
+      - broker-kafka
+    depends_on:
+      - kafka
+    ports:
+      - 19000:9000
+    environment:
+      KAFKA_BROKERCONNECT: kafka:29092
+
 networks:
   hubii_dev:
+  broker-kafka:
+    driver: bridge        
+
 volumes:
   hubbi-mysql:
       driver: local

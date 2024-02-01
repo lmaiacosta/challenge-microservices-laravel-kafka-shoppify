@@ -1,23 +1,15 @@
 <?php
 
 namespace App\Providers;
+
 use App\Jobs\ProductIntegrationJob;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Queue;
 use Illuminate\Queue\Events\JobProcessed;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-//     protected string $baseUrl;
-//     protected string $accessToken;
-
-//     public function __construct($app)
-//     {
-//         parent::__construct($app);
-//         $this->baseUrl = config('shopify.base_url');
-//         $this->accessToken = config('shopify.access_token');
-//     }
 
     /**
      * Register any application services.
