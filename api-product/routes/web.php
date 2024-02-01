@@ -17,7 +17,7 @@ use App\Http\Controllers\DocsController;
 // Route::domain('/*')->group(function () {
 //    return ':){account}';
 // });
-// https://keycloak.hubii.local/
+// https://hubii_keycloak.local/
 // // Route::middleware(['keycloak', 'auth'])->group(function () {
 // //     Route::get('/docs/{path?}','')->where('path', '.*');
 // });

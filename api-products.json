@@ -2,19 +2,19 @@
   "clientId": "api-products",
   "name": "api-products",
   "description": "",
-  "rootUrl": "https://keycloak.hubii.local",
-  "adminUrl": "https://keycloak.hubii.local",
-  "baseUrl": "https://product.hubii.local",
+  "rootUrl": "https://hubii_keycloak.local",
+  "adminUrl": "https://hubii_keycloak.local",
+  "baseUrl": "https://hubii_product.local",
   "surrogateAuthRequired": false,
   "enabled": true,
   "alwaysDisplayInConsole": false,
   "clientAuthenticatorType": "client-secret",
   "secret": "zTKRB6PIfM6bhj3kIG2yiZ8p5CcVcKfm",
   "redirectUris": [
-    "https://product.hubii.local/*"
+    "https://hubii_product.local/*"
   ],
   "webOrigins": [
-    "https://product.hubii.local"
+    "https://hubii_product.local"
   ],
   "notBefore": 0,
   "bearerOnly": false,

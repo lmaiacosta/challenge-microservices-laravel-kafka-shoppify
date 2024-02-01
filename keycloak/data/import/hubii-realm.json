@@ -522,7 +522,7 @@
     "clientId" : "api-products",
     "name" : "api-products",
     "description" : "",
-    "rootUrl" : "https://keycloak.hubii.local",
+    "rootUrl" : "https://hubii_keycloak.local",
     "adminUrl" : "",
     "baseUrl" : "",
     "surrogateAuthRequired" : false,

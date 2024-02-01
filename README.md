@@ -47,10 +47,10 @@ Instalação no seu ambiente no seguinte link:
 
 
 cd /nginx/certs
-mkcert -key-file hubii.local.key.pem -cert-file hubii.local.pem localhost hubbi.local "*.hubii.local" 127.0.0.1 ::1
+mkcert -key-file hubii.local.key.pem -cert-file hubii.local.pem localhost hubbi.local "*.local" 127.0.0.1 ::1
 
 Atualizar hosts
 
 ```
-sudo sh -c 'echo "127.0.0.1 hubbi.local" >> /etc/hosts'
+sudo sh -c 'echo "127.0.0.1 *.local" >> /etc/hosts'
 ```
