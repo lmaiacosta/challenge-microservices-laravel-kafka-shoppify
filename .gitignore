@@ -1,6 +1,7 @@
 .nsfg
 /mysql/data
 /logs
+/_BKP
 /BKP
 .env
 /.fleet
