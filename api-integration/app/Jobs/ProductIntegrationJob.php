@@ -29,7 +29,8 @@ class ProductIntegrationJob implements ShouldQueue
 
     public function handle(): void
     {
-        $product = $this->product;
+        $product = $this->data;
+        Log::info($product);
         $id_shopify = ShopifyProduct::whereIdProduct($product['id'])->value("id_shopify");
         if ($id_shopify > 0) {
             $product['id_shopify'] = $id_shopify;
