@@ -1,4 +1,4 @@
-# Hubii - Challenge
+# Challenge
 
 
 Estamos procurando um desenvolvedor back-end sênior para se juntar à nossa equipe e ajudar a criar e gerenciar nossos micro-serviços em PHP (Laravel). Este teste técnico tem como objetivo avaliar suas habilidades técnicas nessas áreas.
